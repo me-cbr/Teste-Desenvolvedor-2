@@ -1,0 +1,86 @@
+1. Valor da variável SOMA:
+- Início:
+-> INDICE = 13
+-> SOMA = 0
+-> K = 0
+
+- Enquanto a condição "K < INDICE" for verdadeira:
+-> 'K' vai somando 1, tornando-se 'K+1', até que que K seja igual a 13;
+-> 'SOMA' vira 'SOMA + K', logo SOMA = 0 + 1 = 1, até que vire 13.
+
+Cálculo: SOMA = 1 + 2 + 3 + 4 + 5 + 6 +  7 +  8 +  9 +  10 +  11 +  12 +  13 = 91
+
+Valor final de SOMA = 91.
+
+
+2. Sequência de Fibonacci:
+
+def fibonacci(numero):
+  a, b = 0 , 1
+  sequencia = [0, 1]
+  
+  while b <= numero:
+    if b == numero:
+      return f"O número  {numero} pertence à sequência de Fibonacci."
+    a, b = b, a + b
+    sequencia.append(b)
+  
+  return f"O número {numero} não pertence à sequência de Fibonacci. \nEssa é a sequência gerada: {sequencia}"
+
+
+3. Faturamento diário:
+import json
+
+def calcular_faturamento(dados):
+    try:
+        with open(dados, 'r') as arquivo:
+            dados_json = json.load(arquivo)
+    except FileNotFoundError:
+        return "Arquivo não encontrado."
+    except json.JSONDecodeError:
+        return "Arquivo JSON inválido."
+
+    faturamentos = [dia['valor'] for dia in dados_json if dia['valor'] > 0]
+    if not faturamentos:
+        return "Não há dados de faturamento válidos."
+
+    menor_faturamento = min(faturamentos)
+    maior_faturamento = max(faturamentos)
+    media_mensal = sum(faturamentos) / len(faturamentos)
+    dias_acima_da_media = sum(1 for faturamento in faturamentos if faturamento > media_mensal)
+
+    return {
+        "menor_faturamento": menor_faturamento,
+        "maior_faturamento": maior_faturamento,
+        "dias_acima_da_media": dias_acima_da_media
+    }
+
+
+4. Cálculo de percentual:
+
+def calcular_percentual_faturamento():
+  faturamento_estados = {
+    "SP": 67836.43,
+    "RJ": 36678.66,
+    "MG": 29229.88,
+    "ES": 27165.48,
+    "Outros": 19849.53
+  }
+
+  total = sum(faturamento_estados.values())
+  percentuais = {}
+
+  for estado, faturamento in faturamento_estados.items():
+    percentual = faturamento / total) * 100
+    percentuais[estado] = round(percentual, 2)
+  return percentuais
+
+
+5. Inversão de string:
+
+def inverter_string(string_informada):
+  string_invertida = ""
+
+  for i in range(len(string_informada) -1, -1, -1):
+    string_invertida += string_informada[i]
+  return string_invertida
